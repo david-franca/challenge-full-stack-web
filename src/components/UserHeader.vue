@@ -7,6 +7,7 @@
     >
       <h2 class="text-h5">Consulta de Usuários</h2>
       <v-btn
+        v-if="isAdmin"
         size="small"
         @click="isDialogVisible = true"
         icon="mdi-plus"
@@ -28,6 +29,7 @@
       max-width="500px"
     ></v-text-field>
     <v-btn
+      v-if="isAdmin"
       color="primary"
       class="text-none font-weight-regular w-100 w-sm-auto order-2 mb-2 order-sm-3 d-none d-sm-flex d-md-flex d-lg-flex d-xl-flex"
       @click="isDialogVisible = true"
@@ -43,7 +45,9 @@
 import { ref, watch } from 'vue'
 import UserFormDialog from './UserFormDialog.vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useAuth } from '@/stores/auth.store'
 
+const { isAdmin } = useAuth()
 const router = useRouter()
 const route = useRoute()
 const isDialogVisible = ref(false)

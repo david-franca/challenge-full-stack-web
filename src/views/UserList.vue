@@ -24,7 +24,7 @@
           {{ value === 'admin' ? 'Administrador' : 'Professor' }}
         </template>
         <template v-slot:item.actions="{ item }">
-          <v-tooltip location="top" text="Editar Usuário">
+          <v-tooltip v-if="isAdmin" location="top" text="Editar Usuário">
             <template v-slot:activator="{ props }">
               <v-icon v-bind="props" small class="mr-2" @click="openEditModal(item)">
                 mdi-pencil
@@ -32,7 +32,7 @@
             </template>
           </v-tooltip>
 
-          <v-tooltip location="top" text="Excluir Usuário">
+          <v-tooltip v-if="isAdmin" location="top" text="Excluir Usuário">
             <template v-slot:activator="{ props }">
               <v-icon v-bind="props" small @click="openDeleteConfirm(item)"> mdi-delete </v-icon>
             </template>
@@ -60,6 +60,7 @@ import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import type { DataTableSortItem } from 'vuetify'
 import ConfirmDeleteDialog from '@/components/ConfirmDeleteDialog.vue'
+import { useAuth } from '@/stores/auth.store'
 
 interface Options {
   page: number
@@ -67,6 +68,7 @@ interface Options {
   sortBy: { key: string; order: 'asc' | 'desc' }[] // Se precisar de ordenação no futuro
 }
 
+const { isAdmin } = useAuth()
 const route = useRoute()
 const router = useRouter()
 const search = computed(() => route.query.search?.toString() || '')

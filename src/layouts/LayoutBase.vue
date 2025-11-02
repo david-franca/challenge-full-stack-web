@@ -36,24 +36,29 @@
 
 <script setup lang="ts">
 import { useAuth } from '@/stores/auth.store'
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { computed, ref } from 'vue'
 
-const router = useRouter()
-const { clearAuth } = useAuth()
+const { clearAuth, isUser } = useAuth()
 
 const drawer = ref(true)
 
-const menuItems = ref([
+const allMenuItems = ref([
   { title: 'Alunos', icon: 'mdi-school', to: '/students' },
   { title: 'Usuários', icon: 'mdi-account', to: '/users' },
 ])
+
+const menuItems = computed(() => {
+  if (isUser) {
+    return allMenuItems.value.filter((item) => item.to !== '/users')
+  }
+
+  return allMenuItems.value
+})
 
 // --- Métodos (Methods) ---
 function handleLogout() {
   try {
     clearAuth()
-    router.push('/login')
   } catch (error) {
     console.error('Erro no logout:', error)
   }

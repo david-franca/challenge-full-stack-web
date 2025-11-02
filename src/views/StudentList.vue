@@ -32,7 +32,7 @@
             </template>
           </v-tooltip>
 
-          <v-tooltip location="top" text="Excluir Aluno">
+          <v-tooltip v-if="isAdmin" location="top" text="Excluir Aluno">
             <template v-slot:activator="{ props }">
               <v-icon v-bind="props" small @click="openDeleteConfirm(item)"> mdi-delete </v-icon>
             </template>
@@ -61,6 +61,7 @@ import type { DataTableSortItem } from 'vuetify'
 import StudentFormDialog from '@/components/StudentFormDialog.vue'
 import { useRemoveStudent } from '@/services/students/hooks/useRemoveStudent'
 import ConfirmDeleteDialog from '@/components/ConfirmDeleteDialog.vue'
+import { useAuth } from '@/stores/auth.store'
 
 interface Options {
   page: number
@@ -68,6 +69,7 @@ interface Options {
   sortBy: { key: string; order: 'asc' | 'desc' }[] // Se precisar de ordenação no futuro
 }
 
+const { isAdmin } = useAuth()
 const route = useRoute()
 const router = useRouter()
 const search = computed(() => route.query.search?.toString() || '')
