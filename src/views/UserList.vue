@@ -37,10 +37,12 @@
         </template>
       </v-data-table-server>
     </v-card-text>
+    <UserFormDialog v-model="isDialogVisible" :user="selectedUser" />
   </v-card>
 </template>
 
 <script setup lang="ts">
+import UserFormDialog from '@/components/UserFormDialog.vue'
 import UserHeader from '@/components/UserHeader.vue'
 import { useGetAllUsers } from '@/services/users/hooks/useGetAllUsers'
 import { useRemoveUser } from '@/services/users/hooks/useRemoveUser'
