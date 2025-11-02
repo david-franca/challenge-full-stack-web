@@ -1,6 +1,8 @@
+import { i18n } from '@/locales/i18n'
 import { AxiosError } from 'axios'
 
 export const handleErrors = (err: unknown) => {
+  const t = i18n.global.t
   const messages: string[] = []
   if (err instanceof AxiosError && err.response) {
     const errors = err.response.data.errors
@@ -14,7 +16,7 @@ export const handleErrors = (err: unknown) => {
   } else if (err instanceof Error) {
     messages.push(err.message)
   } else {
-    messages.push('Erro desconhecido')
+    messages.push(t('notifications.auth.error'))
   }
 
   return messages

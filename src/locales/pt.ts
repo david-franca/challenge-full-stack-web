@@ -96,4 +96,25 @@ export const pt = {
       email: 'O e-mail deve ser válido.',
     },
   },
+  notifications: {
+    student: {
+      created: 'Aluno adicionado com sucesso!',
+      updated: 'Aluno atualizado com sucesso!',
+      removed: 'Aluno removido com sucesso!',
+    },
+    session: {
+      expired: 'Sua sessão expirou. Por favor, faça login.',
+    },
+    user: {
+      created: 'Usuário adicionado com sucesso!',
+      updated: 'Usuário atualizado com sucesso!',
+      removed: 'Usuário removido com sucesso!',
+    },
+    auth: {
+      sessionExpired: 'Sua sessão expirou. Por favor, faça login novamente.',
+      invalidToken: 'Token JWT inválido:',
+      logout: 'Saindo...',
+      error: 'Erro desconhecido.',
+    },
+  },
 }

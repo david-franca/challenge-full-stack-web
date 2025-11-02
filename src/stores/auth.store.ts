@@ -5,6 +5,7 @@ import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import { useMessages } from './messages.store'
 import { useRouter } from 'vue-router'
+import { i18n } from '@/locales/i18n'
 
 type UserRole = 'admin' | 'user' | null
 
@@ -21,6 +22,7 @@ export const useAuth = defineStore(
   'auth',
   () => {
     const { addMessage } = useMessages()
+    const t = i18n.global.t
     const router = useRouter()
     const token = ref<string | null>(null)
     const user = ref<User | null>(null)
@@ -56,12 +58,12 @@ export const useAuth = defineStore(
         const expirationTime = decoded.exp * 1000 - Date.now()
 
         tokenTimer.value = setTimeout(() => {
-          clearAuth('Sua sessão expirou. Por favor, faça login novamente.')
+          clearAuth(t('notifications.auth.sessionExpired'))
         }, expirationTime)
 
         setAuthHeader(newToken)
       } catch (error) {
-        console.error('Token JWT inválido:', error)
+        console.error(t('notifications.auth.invalidToken'), error)
         clearAuth()
       }
     }
