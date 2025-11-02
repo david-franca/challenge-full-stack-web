@@ -5,7 +5,7 @@
     <div
       class="order-1 d-flex flex-row align-center justify-space-between mb-2 mb-sm-0 w-100 w-sm-auto mr-sm-2"
     >
-      <h2 class="text-h5">Consulta de Alunos</h2>
+      <h2 class="text-h5">{{ t('studentHeader.title') }}</h2>
       <v-btn
         v-if="isAdmin"
         size="small"
@@ -19,7 +19,7 @@
       v-model="search"
       append-inner-icon="mdi-magnify"
       density="compact"
-      label="Digite sua busca..."
+      :label="t('studentHeader.searchPlaceholder')"
       variant="solo"
       hide-details
       single-line
@@ -35,7 +35,9 @@
       @click="isDialogVisible = true"
     >
       <v-icon icon="mdi-plus"></v-icon>
-      <span class="ml-2 d-sm-none d-md-block d-lg-block d-xl-block">Cadastrar Aluno</span>
+      <span class="ml-2 d-sm-none d-md-block d-lg-block d-xl-block">{{
+        t('studentHeader.registerStudent')
+      }}</span>
     </v-btn>
     <StudentFormDialog v-model="isDialogVisible" :student="null" />
   </v-card-title>
@@ -46,7 +48,9 @@ import { ref, watch } from 'vue'
 import StudentFormDialog from './StudentFormDialog.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuth } from '@/stores/auth.store'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const { isAdmin } = useAuth()
 const router = useRouter()
 const route = useRoute()

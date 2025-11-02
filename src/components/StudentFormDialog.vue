@@ -7,7 +7,7 @@
             <v-col cols="12">
               <v-text-field
                 v-model="name"
-                label="Nome Completo*"
+                :label="t('studentFormDialog.labels.name')"
                 required
                 :rules="[rules.required]"
               ></v-text-field>
@@ -16,7 +16,7 @@
             <v-col cols="12">
               <v-text-field
                 v-model="email"
-                label="Email*"
+                :label="t('studentFormDialog.labels.email')"
                 required
                 :rules="[rules.required, rules.email]"
               ></v-text-field>
@@ -26,7 +26,7 @@
               <v-text-field
                 v-model="ra"
                 :disabled="isEditing"
-                label="RA (Registro Acadêmico)*"
+                :label="t('studentFormDialog.labels.ra')"
                 required
                 :rules="[rules.required]"
               ></v-text-field>
@@ -36,7 +36,7 @@
               <v-text-field
                 v-model="maskedCpf"
                 :disabled="isEditing"
-                label="CPF (Cadastro de Pessoas Físicas)*"
+                :label="t('studentFormDialog.labels.cpf')"
                 required
                 placeholder="000.000.000-00"
                 :rules="[rules.required, rules.cpfLength, rules.cpfValid]"
@@ -46,7 +46,9 @@
           </v-row>
         </v-form>
 
-        <small class="text-caption text-medium-emphasis">*indica campos obrigatórios</small>
+        <small class="text-caption text-medium-emphasis">{{
+          t('studentFormDialog.requiredFields')
+        }}</small>
       </v-card-text>
 
       <v-divider></v-divider>
@@ -54,7 +56,11 @@
       <v-card-actions>
         <v-spacer></v-spacer>
 
-        <v-btn text="Cancelar" variant="plain" @click="dialog = false"></v-btn>
+        <v-btn
+          :text="t('studentFormDialog.cancelButton')"
+          variant="plain"
+          @click="dialog = false"
+        ></v-btn>
 
         <v-btn
           color="primary"
@@ -74,7 +80,7 @@ import { useCreateStudent } from '@/services/students/hooks/useCreateStudent'
 import { useUpdateStudent } from '@/services/students/hooks/useUpdateStudent'
 import type { Student } from '@/types/Student'
 import { validateCPF } from '@/utils'
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, type Ref } from 'vue'
 import { useMask } from 'vuetify'
 
 const props = defineProps<{
@@ -83,6 +89,10 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits(['update:modelValue'])
+
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const { mutateAsync: createStudent, isPending: isCreating } = useCreateStudent()
 const { mutateAsync: updateStudent, isPending: isUpdating } = useUpdateStudent()
@@ -107,17 +117,22 @@ const dialog = computed({
 
 const isEditing = computed(() => !!props.student)
 
-const cardTitle = computed(() => (isEditing.value ? 'Editar Aluno' : 'Cadastrar Aluno'))
-const saveButtonText = computed(() => (isEditing.value ? 'Atualizar' : 'Salvar'))
+const cardTitle = computed(() =>
+  isEditing.value ? t('studentFormDialog.editTitle') : t('studentFormDialog.createTitle'),
+)
+const saveButtonText = computed(() =>
+  isEditing.value ? t('studentFormDialog.updateButton') : t('studentFormDialog.saveButton'),
+)
 
 const rules = {
-  required: (value: string) => !!value || 'Este campo é obrigatório.',
-  email: (value: string) => /.+@.+\..+/.test(value) || 'O e-mail deve ser válido.',
-  cpfLength: (value: string) => (value && value.length === 14) || 'O CPF deve conter 11 dígitos.',
-  cpfValid: (value: string) => validateCPF(value) || 'CPF inválido.',
+  required: (value: string) => !!value || t('studentFormDialog.rules.required'),
+  email: (value: string) => /.+@.+\..+/.test(value) || t('studentFormDialog.rules.email'),
+  cpfLength: (value: string) =>
+    (value && value.length === 14) || t('studentFormDialog.rules.cpfLength'),
+  cpfValid: (value: string) => validateCPF(value) || t('studentFormDialog.rules.cpfValid'),
 }
 
-const maskedCpf = ref('')
+const maskedCpf: Ref<string> = ref('')
 
 function resetForm() {
   name.value = ''

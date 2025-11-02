@@ -15,8 +15,8 @@
         :items-per-page="itemsPerPage"
         :items-length="data?.meta.totalItems || 0"
         :sort-by="[{ key: field, order: order }]"
-        loading-text="Carregando dados... Por favor, aguarde."
-        no-data-text="Nenhum aluno encontrado."
+        :loading-text="t('studentList.loading')"
+        :no-data-text="t('studentList.noData')"
         class="elevation-1"
         @update:options="updateOptions"
       >
@@ -24,7 +24,7 @@
           {{ formatCPF(value) }}
         </template>
         <template v-slot:item.actions="{ item }">
-          <v-tooltip location="top" text="Editar Aluno">
+          <v-tooltip location="top" :text="t('studentList.editStudent')">
             <template v-slot:activator="{ props }">
               <v-icon v-bind="props" small class="mr-2" @click="openEditModal(item)">
                 mdi-pencil
@@ -32,7 +32,7 @@
             </template>
           </v-tooltip>
 
-          <v-tooltip v-if="isAdmin" location="top" text="Excluir Aluno">
+          <v-tooltip v-if="isAdmin" location="top" :text="t('studentList.deleteStudent')">
             <template v-slot:activator="{ props }">
               <v-icon v-bind="props" small @click="openDeleteConfirm(item)"> mdi-delete </v-icon>
             </template>
@@ -56,6 +56,7 @@ import { useGetAllStudents } from '@/services/students/hooks/useGetAllStudents'
 import type { Student } from '@/types/Student'
 import { formatCPF } from '@/utils/formatCPF'
 import { computed, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import type { DataTableSortItem } from 'vuetify'
 import StudentFormDialog from '@/components/StudentFormDialog.vue'
@@ -69,6 +70,7 @@ interface Options {
   sortBy: { key: string; order: 'asc' | 'desc' }[] // Se precisar de ordenação no futuro
 }
 
+const { t } = useI18n()
 const { isAdmin } = useAuth()
 const route = useRoute()
 const router = useRouter()
@@ -92,11 +94,16 @@ const { data, isLoading, isSuccess } = useGetAllStudents({
 const { mutateAsync, isPending } = useRemoveStudent()
 
 const headers = ref([
-  { title: 'RA', key: 'ra', align: 'start' as const },
-  { title: 'Nome', key: 'name', align: 'start' as const },
-  { title: 'Email', key: 'email', align: 'start' as const },
-  { title: 'CPF', key: 'cpf', align: 'start' as const },
-  { title: 'Ações', key: 'actions', sortable: false, align: 'center' as const },
+  { title: t('studentList.headers.ra'), key: 'ra', align: 'start' as const },
+  { title: t('studentList.headers.name'), key: 'name', align: 'start' as const },
+  { title: t('studentList.headers.email'), key: 'email', align: 'start' as const },
+  { title: t('studentList.headers.cpf'), key: 'cpf', align: 'start' as const },
+  {
+    title: t('studentList.headers.actions'),
+    key: 'actions',
+    sortable: false,
+    align: 'center' as const,
+  },
 ])
 
 function updateOptions({ page: newPage, itemsPerPage: newItemsPerPage, sortBy }: Options) {
