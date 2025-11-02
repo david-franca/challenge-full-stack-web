@@ -3,7 +3,10 @@
   <v-card>
     <UserHeader />
     <v-card-text>
+      <v-skeleton-loader v-if="isLoading && !isSuccess" type="table-row@5"></v-skeleton-loader>
+
       <v-data-table-server
+        v-else
         mobile-breakpoint="md"
         :headers="headers"
         :items="data?.items"
@@ -76,7 +79,13 @@ const itemsPerPage = ref(Number(route.query.limit) || 10)
 const selectedUser = ref<User | null>(null)
 const isDialogVisible = ref(false)
 const isDeleteDialogOpen = ref(false)
-const { data, isLoading } = useGetAllUsers({ search, limit: itemsPerPage, page, field, order })
+const { data, isLoading, isSuccess } = useGetAllUsers({
+  search,
+  limit: itemsPerPage,
+  page,
+  field,
+  order,
+})
 const { mutateAsync, isPending } = useRemoveUser()
 
 const headers = ref([
