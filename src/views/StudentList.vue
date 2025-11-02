@@ -93,7 +93,7 @@ const { data, isLoading, isSuccess } = useGetAllStudents({
 })
 const { mutateAsync, isPending } = useRemoveStudent()
 
-const headers = ref([
+const headers = computed(() => [
   { title: t('studentList.headers.ra'), key: 'ra', align: 'start' as const },
   { title: t('studentList.headers.name'), key: 'name', align: 'start' as const },
   { title: t('studentList.headers.email'), key: 'email', align: 'start' as const },
