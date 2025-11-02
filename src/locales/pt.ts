@@ -56,4 +56,44 @@ export const pt = {
     cancelButton: 'Cancelar',
     deleteButton: 'Excluir',
   },
+  userList: {
+    loading: 'Carregando dados... Por favor, aguarde.',
+    noData: 'Nenhum usuário encontrado.',
+    editUser: 'Editar Usuário',
+    deleteUser: 'Excluir Usuário',
+    headers: {
+      id: 'ID',
+      name: 'Nome',
+      email: 'Email',
+      role: 'Cargo',
+      actions: 'Ações',
+    },
+    roles: {
+      admin: 'Administrador',
+      user: 'Professor',
+    },
+  },
+  userHeader: {
+    title: 'Consulta de Usuários',
+    searchPlaceholder: 'Digite sua busca...',
+    registerUser: 'Cadastrar Usuário',
+  },
+  userFormDialog: {
+    createTitle: 'Cadastrar Usuário',
+    editTitle: 'Editar Usuário',
+    saveButton: 'Salvar',
+    updateButton: 'Atualizar',
+    cancelButton: 'Cancelar',
+    requiredFields: '*indica campos obrigatórios',
+    labels: {
+      name: 'Nome Completo*',
+      email: 'Email*',
+      password: 'Senha*',
+      newPassword: 'Nova Senha',
+    },
+    rules: {
+      required: 'Este campo é obrigatório.',
+      email: 'O e-mail deve ser válido.',
+    },
+  },
 }

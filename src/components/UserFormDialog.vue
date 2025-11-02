@@ -7,7 +7,7 @@
             <v-col cols="12">
               <v-text-field
                 v-model="name"
-                label="Nome Completo*"
+                :label="t('userFormDialog.labels.name')"
                 required
                 :rules="[rules.required]"
               ></v-text-field>
@@ -16,7 +16,7 @@
             <v-col cols="12">
               <v-text-field
                 v-model="email"
-                label="Email*"
+                :label="t('userFormDialog.labels.email')"
                 required
                 :rules="[rules.required, rules.email]"
               ></v-text-field>
@@ -26,7 +26,11 @@
               <v-text-field
                 v-model="password"
                 type="password"
-                :label="isEditing ? 'Nova Senha' : 'Senha*'"
+                :label="
+                  isEditing
+                    ? t('userFormDialog.labels.newPassword')
+                    : t('userFormDialog.labels.password')
+                "
                 :required="!isEditing"
                 :rules="[rules.required]"
               ></v-text-field>
@@ -34,7 +38,9 @@
           </v-row>
         </v-form>
 
-        <small class="text-caption text-medium-emphasis">*indica campos obrigatórios</small>
+        <small class="text-caption text-medium-emphasis">{{
+          t('userFormDialog.requiredFields')
+        }}</small>
       </v-card-text>
 
       <v-divider></v-divider>
@@ -42,7 +48,11 @@
       <v-card-actions>
         <v-spacer></v-spacer>
 
-        <v-btn text="Cancelar" variant="plain" @click="dialog = false"></v-btn>
+        <v-btn
+          :text="t('userFormDialog.cancelButton')"
+          variant="plain"
+          @click="dialog = false"
+        ></v-btn>
 
         <v-btn
           color="primary"
@@ -62,12 +72,14 @@ import { useCreateUser } from '@/services/users/hooks/useCreateUser'
 import { useUpdateUser } from '@/services/users/hooks/useUpdateUser'
 import type { User } from '@/types'
 import { computed, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 const props = defineProps<{
   modelValue: boolean
   user: User | null
 }>()
 
+const { t } = useI18n()
 const emit = defineEmits(['update:modelValue'])
 
 const { mutateAsync: createUser, isPending: isCreating } = useCreateUser()
@@ -90,12 +102,16 @@ const dialog = computed({
 
 const isEditing = computed(() => !!props.user)
 
-const cardTitle = computed(() => (isEditing.value ? 'Editar Usuário' : 'Cadastrar Usuário'))
-const saveButtonText = computed(() => (isEditing.value ? 'Atualizar' : 'Salvar'))
+const cardTitle = computed(() =>
+  isEditing.value ? t('userFormDialog.editTitle') : t('userFormDialog.createTitle'),
+)
+const saveButtonText = computed(() =>
+  isEditing.value ? t('userFormDialog.updateButton') : t('userFormDialog.saveButton'),
+)
 
 const rules = {
-  required: (value: string) => !!value || 'Este campo é obrigatório.',
-  email: (value: string) => /.+@.+\..+/.test(value) || 'O e-mail deve ser válido.',
+  required: (value: string) => !!value || t('userFormDialog.rules.required'),
+  email: (value: string) => /.+@.+\..+/.test(value) || t('userFormDialog.rules.email'),
 }
 
 function resetForm() {
