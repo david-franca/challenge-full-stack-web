@@ -6,6 +6,7 @@ import { es } from './es'
 const lang = localStorage.getItem('locale') || 'pt'
 
 export const i18n = createI18n({
+  legacy: false,
   locale: lang,
   fallbackLocale: 'en',
   messages: {

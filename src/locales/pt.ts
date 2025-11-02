@@ -1,4 +1,9 @@
+import { pt as ptLocale } from 'vuetify/locale'
+
 export const pt = {
+  $vuetify: {
+    ...ptLocale,
+  },
   login: {
     title: 'Sistema de Gerenciamento',
     subtitle: 'Entre com sua conta para continuar',

@@ -6,8 +6,8 @@
     <div class="card-container">
       <v-card variant="text">
         <v-img src="./teacher.svg" alt="MaisA Logo" height="6rem" class="mb-4" />
-        <v-card-title class="text-h5 text-center"> {{ t('login.title') }} </v-card-title>
-        <v-card-subtitle class="text-center pb-4">
+        <v-card-title class="text-h5 text-center text-wrap"> {{ t('login.title') }} </v-card-title>
+        <v-card-subtitle class="text-center pb-4 text-wrap">
           {{ t('login.subtitle') }}
         </v-card-subtitle>
         <v-form ref="form" @submit.prevent="handleLogin">

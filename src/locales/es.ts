@@ -1,4 +1,9 @@
+import { es as esLocale } from 'vuetify/locale'
+
 export const es = {
+  $vuetify: {
+    ...esLocale,
+  },
   login: {
     title: 'Sistema de Gestión',
     subtitle: 'Inicia sesión con tu cuenta para continuar',
@@ -18,7 +23,7 @@ export const es = {
     headers: {
       ra: 'RA',
       name: 'Nombre',
-      email: 'Correo Electrónico',
+      email: 'Email',
       cpf: 'CPF',
       actions: 'Acciones',
     },
@@ -64,7 +69,7 @@ export const es = {
     headers: {
       id: 'ID',
       name: 'Nombre',
-      email: 'Correo Electrónico',
+      email: 'Email',
       role: 'Rol',
       actions: 'Acciones',
     },

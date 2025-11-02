@@ -4,11 +4,13 @@
 import 'vuetify/styles'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
-import { pt } from 'vuetify/locale'
+import { useI18n } from 'vue-i18n'
 
 import '@mdi/font/css/materialdesignicons.css'
 
 import { createVuetify } from 'vuetify'
+import { createVueI18nAdapter } from 'vuetify/locale/adapters/vue-i18n'
+import { i18n } from '@/locales/i18n'
 
 // Define o tema (opcional, mas bom para ter o modo escuro)
 const lightTheme = {
@@ -38,8 +40,6 @@ export default createVuetify({
     defaultSet: 'mdi', // Define o conjunto de ícones padrão
   },
   locale: {
-    locale: 'pt',
-    fallback: 'en',
-    messages: { pt },
+    adapter: createVueI18nAdapter({ i18n, useI18n }),
   },
 })

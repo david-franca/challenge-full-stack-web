@@ -1,4 +1,9 @@
+import { en as enLocale } from 'vuetify/locale'
+
 export const en = {
+  $vuetify: {
+    ...enLocale,
+  },
   login: {
     title: 'Management System',
     subtitle: 'Log in with your account to continue',
