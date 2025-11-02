@@ -1,0 +1,120 @@
+export const en = {
+  login: {
+    title: 'Management System',
+    subtitle: 'Log in with your account to continue',
+    button: 'Login',
+    email: 'E-mail',
+    password: 'Password',
+  },
+  layout: {
+    students: 'Students',
+    users: 'Users',
+  },
+  studentList: {
+    loading: 'Loading data... Please wait.',
+    noData: 'No students found.',
+    editStudent: 'Edit Student',
+    deleteStudent: 'Delete Student',
+    headers: {
+      ra: 'RA',
+      name: 'Name',
+      email: 'Email',
+      cpf: 'CPF',
+      actions: 'Actions',
+    },
+  },
+  studentHeader: {
+    title: 'Student Query',
+    searchPlaceholder: 'Enter your search...',
+    registerStudent: 'Register Student',
+  },
+  studentFormDialog: {
+    createTitle: 'Register Student',
+    editTitle: 'Edit Student',
+    saveButton: 'Save',
+    updateButton: 'Update',
+    cancelButton: 'Cancel',
+    requiredFields: '*indicates required fields',
+    labels: {
+      name: 'Full Name*',
+      email: 'Email*',
+      ra: 'RA (Academic Registry)*',
+      cpf: 'CPF (Individual Taxpayer Registry)*',
+    },
+    rules: {
+      required: 'This field is required.',
+      email: 'The e-mail must be valid.',
+      cpfLength: 'The CPF must contain 11 digits.',
+      cpfValid: 'Invalid CPF.',
+    },
+  },
+  confirmDeleteDialog: {
+    title: 'Confirm Deletion',
+    confirmationMessage: 'Are you sure you want to delete "{name}"?',
+    confirmationMessageGeneric: 'Are you sure you want to delete this item?',
+    irreversibleAction: 'This action cannot be undone.',
+    cancelButton: 'Cancel',
+    deleteButton: 'Delete',
+  },
+  userList: {
+    loading: 'Loading data... Please wait.',
+    noData: 'No users found.',
+    editUser: 'Edit User',
+    deleteUser: 'Delete User',
+    headers: {
+      id: 'ID',
+      name: 'Name',
+      email: 'Email',
+      role: 'Role',
+      actions: 'Actions',
+    },
+    roles: {
+      admin: 'Administrator',
+      user: 'Professor',
+    },
+  },
+  userHeader: {
+    title: 'User Query',
+    searchPlaceholder: 'Enter your search...',
+    registerUser: 'Register User',
+  },
+  userFormDialog: {
+    createTitle: 'Register User',
+    editTitle: 'Edit User',
+    saveButton: 'Save',
+    updateButton: 'Update',
+    cancelButton: 'Cancel',
+    requiredFields: '*indicates required fields',
+    labels: {
+      name: 'Full Name*',
+      email: 'Email*',
+      password: 'Password*',
+      newPassword: 'New Password',
+    },
+    rules: {
+      required: 'This field is required.',
+      email: 'The e-mail must be valid.',
+    },
+  },
+  notifications: {
+    student: {
+      created: 'Student added successfully!',
+      updated: 'Student updated successfully!',
+      removed: 'Student removed successfully!',
+    },
+    session: {
+      expired: 'Your session has expired. Please log in.',
+    },
+    user: {
+      created: 'User added successfully!',
+      updated: 'User updated successfully!',
+      removed: 'User removed successfully!',
+    },
+    auth: {
+      sessionExpired: 'Your session has expired. Please log in again.',
+      invalidToken: 'Invalid JWT token:',
+      logout: 'Logging out...',
+      error: 'Unknown error.',
+    },
+  },
+}

@@ -14,7 +14,6 @@ export const login = async (credentials: Login): Promise<AuthReponse> => {
     const { data } = await api.post<AuthReponse>('/auth/login', credentials)
     return data
   } catch (error) {
-    console.error('Erro ao fazer login:', error)
     setAuthHeader(null)
     throw error
   }

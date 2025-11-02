@@ -6,14 +6,14 @@
     <div class="card-container">
       <v-card variant="text">
         <v-img src="./teacher.svg" alt="MaisA Logo" height="6rem" class="mb-4" />
-        <v-card-title class="text-h5 text-center"> Sistema de Gerenciamento - IES </v-card-title>
+        <v-card-title class="text-h5 text-center"> {{ t('login.title') }} </v-card-title>
         <v-card-subtitle class="text-center pb-4">
-          Entre com sua conta para continuar
+          {{ t('login.subtitle') }}
         </v-card-subtitle>
         <v-form ref="form" @submit.prevent="handleLogin">
           <v-text-field
             v-model="email"
-            label="Email"
+            :label="t('login.email')"
             type="email"
             variant="outlined"
             :rules="emailRules"
@@ -23,7 +23,7 @@
 
           <v-text-field
             v-model="password"
-            label="Senha"
+            :label="t('login.password')"
             :type="showPassword ? 'text' : 'password'"
             :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
             @click:append-inner="showPassword = !showPassword"
@@ -34,7 +34,7 @@
           ></v-text-field>
 
           <v-btn type="submit" color="primary" size="large" block :loading="isPending" class="mt-2">
-            Entrar
+            {{ t('login.button') }}
           </v-btn>
         </v-form>
       </v-card>
@@ -45,10 +45,12 @@
 <script setup lang="ts">
 import { useLogin } from '@/services/auth/hooks/useLogin'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 type VForm = InstanceType<(typeof import('vuetify/components'))['VForm']>
 
 const { mutate, isPending } = useLogin()
+const { t } = useI18n()
 
 // --- Estado (State) ---
 const email = ref('admin@example.com')

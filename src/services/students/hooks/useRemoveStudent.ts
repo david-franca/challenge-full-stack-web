@@ -2,16 +2,18 @@ import { useMutation, useQueryClient } from '@tanstack/vue-query'
 import { removeStudent } from '../api/studentService'
 import { useMessages } from '@/stores/messages.store'
 import { handleErrors } from '@/utils/handleErrors'
+import { useI18n } from 'vue-i18n'
 
 export const useRemoveStudent = () => {
   const queryClient = useQueryClient()
   const { addMessage } = useMessages()
+  const { t } = useI18n()
 
   return useMutation({
     mutationFn: (ra: string) => removeStudent(ra),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['students'] })
-      addMessage({ text: 'Aluno removido com sucesso!', color: 'success' })
+      addMessage({ text: t('notifications.student.removed'), color: 'success' })
     },
     onError: (err) => {
       const messages = handleErrors(err)

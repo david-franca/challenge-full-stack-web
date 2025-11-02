@@ -3,7 +3,10 @@
   <v-card>
     <UserHeader />
     <v-card-text>
+      <v-skeleton-loader v-if="isLoading && !isSuccess" type="table-row@5"></v-skeleton-loader>
+
       <v-data-table-server
+        v-else
         mobile-breakpoint="md"
         :headers="headers"
         :items="data?.items"
@@ -12,16 +15,16 @@
         :items-per-page="itemsPerPage"
         :items-length="data?.meta.totalItems || 0"
         :sort-by="[{ key: field, order: order }]"
-        loading-text="Carregando dados... Por favor, aguarde."
-        no-data-text="Nenhum aluno encontrado."
+        :loading-text="t('userList.loading')"
+        :no-data-text="t('userList.noData')"
         class="elevation-1"
         @update:options="updateOptions"
       >
         <template v-slot:item.role="{ value }">
-          {{ value === 'admin' ? 'Administrador' : 'Professor' }}
+          {{ t(`userList.roles.${value}`) }}
         </template>
         <template v-slot:item.actions="{ item }">
-          <v-tooltip location="top" text="Editar Usuário">
+          <v-tooltip v-if="isAdmin" location="top" :text="t('userList.editUser')">
             <template v-slot:activator="{ props }">
               <v-icon v-bind="props" small class="mr-2" @click="openEditModal(item)">
                 mdi-pencil
@@ -29,7 +32,7 @@
             </template>
           </v-tooltip>
 
-          <v-tooltip location="top" text="Excluir Usuário">
+          <v-tooltip v-if="isAdmin" location="top" :text="t('userList.deleteUser')">
             <template v-slot:activator="{ props }">
               <v-icon v-bind="props" small @click="openDeleteConfirm(item)"> mdi-delete </v-icon>
             </template>
@@ -57,6 +60,7 @@ import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import type { DataTableSortItem } from 'vuetify'
 import ConfirmDeleteDialog from '@/components/ConfirmDeleteDialog.vue'
+import { useAuth } from '@/stores/auth.store'
 
 interface Options {
   page: number
@@ -64,6 +68,10 @@ interface Options {
   sortBy: { key: string; order: 'asc' | 'desc' }[] // Se precisar de ordenação no futuro
 }
 
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+const { isAdmin } = useAuth()
 const route = useRoute()
 const router = useRouter()
 const search = computed(() => route.query.search?.toString() || '')
@@ -76,15 +84,26 @@ const itemsPerPage = ref(Number(route.query.limit) || 10)
 const selectedUser = ref<User | null>(null)
 const isDialogVisible = ref(false)
 const isDeleteDialogOpen = ref(false)
-const { data, isLoading } = useGetAllUsers({ search, limit: itemsPerPage, page, field, order })
+const { data, isLoading, isSuccess } = useGetAllUsers({
+  search,
+  limit: itemsPerPage,
+  page,
+  field,
+  order,
+})
 const { mutateAsync, isPending } = useRemoveUser()
 
-const headers = ref([
-  { title: 'ID', key: 'id', align: 'start' as const },
-  { title: 'Nome', key: 'name', align: 'start' as const },
-  { title: 'Email', key: 'email', align: 'start' as const },
-  { title: 'Cargo', key: 'role', align: 'start' as const },
-  { title: 'Ações', key: 'actions', sortable: false, align: 'center' as const },
+const headers = computed(() => [
+  { title: t('userList.headers.id'), key: 'id', align: 'start' as const },
+  { title: t('userList.headers.name'), key: 'name', align: 'start' as const },
+  { title: t('userList.headers.email'), key: 'email', align: 'start' as const },
+  { title: t('userList.headers.role'), key: 'role', align: 'start' as const },
+  {
+    title: t('userList.headers.actions'),
+    key: 'actions',
+    sortable: false,
+    align: 'center' as const,
+  },
 ])
 
 function updateOptions({ page: newPage, itemsPerPage: newItemsPerPage, sortBy }: Options) {

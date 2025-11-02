@@ -4,10 +4,10 @@
 import 'vuetify/styles'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
-// Importa os ícones (necessário para o v-icon)
+import { pt } from 'vuetify/locale'
+
 import '@mdi/font/css/materialdesignicons.css'
 
-// Importa a função de criação do Vuetify
 import { createVuetify } from 'vuetify'
 
 // Define o tema (opcional, mas bom para ter o modo escuro)
@@ -36,5 +36,10 @@ export default createVuetify({
   },
   icons: {
     defaultSet: 'mdi', // Define o conjunto de ícones padrão
+  },
+  locale: {
+    locale: 'pt',
+    fallback: 'en',
+    messages: { pt },
   },
 })

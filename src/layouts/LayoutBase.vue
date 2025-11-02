@@ -21,6 +21,19 @@
 
       <v-spacer></v-spacer>
 
+      <v-menu>
+        <template v-slot:activator="{ props }">
+          <v-btn icon="mdi-translate" variant="text" color="white" v-bind="props"></v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item v-for="(item, i) in items" :key="i" :value="i">
+            <v-list-item-title @click="changeLanguage(item.value)">{{
+              item.title
+            }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
       <v-btn icon color="white" @click="handleLogout">
         <v-icon>mdi-logout</v-icon>
       </v-btn>
@@ -36,27 +49,41 @@
 
 <script setup lang="ts">
 import { useAuth } from '@/stores/auth.store'
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-const router = useRouter()
-const { clearAuth } = useAuth()
+const { clearAuth, isUser } = useAuth()
+const { t, locale } = useI18n()
 
 const drawer = ref(true)
 
-const menuItems = ref([
-  { title: 'Alunos', icon: 'mdi-school', to: '/students' },
-  { title: 'Usuários', icon: 'mdi-account', to: '/users' },
+const allMenuItems = computed(() => [
+  { title: t('layout.students'), icon: 'mdi-school', to: '/students' },
+  { title: t('layout.users'), icon: 'mdi-account', to: '/users' },
 ])
 
-// --- Métodos (Methods) ---
-function handleLogout() {
-  try {
-    clearAuth()
-    router.push('/login')
-  } catch (error) {
-    console.error('Erro no logout:', error)
+const menuItems = computed(() => {
+  if (isUser) {
+    return allMenuItems.value.filter((item) => item.to !== '/users')
   }
+
+  return allMenuItems.value
+})
+
+const items = [
+  { title: 'Português', value: 'pt' },
+  { title: 'Inglês', value: 'en' },
+  { title: 'Espanhol', value: 'es' },
+]
+
+// --- Métodos (Methods) ---
+function changeLanguage(lang: string) {
+  locale.value = lang // muda o idioma
+  localStorage.setItem('locale', lang)
+}
+
+function handleLogout() {
+  clearAuth()
 }
 </script>
 

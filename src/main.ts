@@ -8,11 +8,13 @@ import { registerPlugins } from './plugins'
 import router from './router'
 import { useAuth } from './stores/auth.store'
 import { setAuthHeader } from './services/auth/api/authService'
+import { useMessages } from './stores/messages.store'
 
 const app = createApp(App)
 
 router.beforeEach((to, from, next) => {
-  const { isLoggedIn, token } = useAuth()
+  const { isLoggedIn, token, isUser } = useAuth()
+  const { addMessage } = useMessages()
 
   if (token) {
     setAuthHeader(token)
@@ -23,6 +25,14 @@ router.beforeEach((to, from, next) => {
 
   if (authRequired && !isLoggedIn) {
     return next('/login')
+  }
+
+  if (to.path === '/users' && isUser) {
+    addMessage({
+      text: 'Usuário não autorizado',
+      color: 'error',
+    })
+    return next('/students')
   }
 
   if (!authRequired && isLoggedIn) {

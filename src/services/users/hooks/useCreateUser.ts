@@ -3,15 +3,17 @@ import type { Register } from '@/types'
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
 import { createUser } from '../api/userService'
 import { handleErrors } from '@/utils/handleErrors'
+import { useI18n } from 'vue-i18n'
 
 export const useCreateUser = () => {
   const queryClient = useQueryClient()
   const { addMessage } = useMessages()
+  const { t } = useI18n()
 
   return useMutation({
     mutationFn: (payload: Register) => createUser(payload),
     onSuccess: () => {
-      addMessage({ text: 'Usuário adicionado com sucesso!', color: 'success' })
+      addMessage({ text: t('notifications.user.created'), color: 'success' })
       queryClient.invalidateQueries({ queryKey: ['users'] })
     },
     onError: (err) => {

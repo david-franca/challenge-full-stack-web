@@ -8,25 +8,28 @@
     <v-card class="pa-2">
       <v-card-title class="text-h5 d-flex align-center">
         <v-icon color="warning" class="mr-3">mdi-alert-circle-outline</v-icon>
-        Confirmar Exclusão
+        {{ t('confirmDeleteDialog.title') }}
       </v-card-title>
 
       <v-card-text>
-        Você tem certeza que deseja excluir
-        <strong v-if="props.name">"{{ props.name }}"</strong>? <br /><br />
-        Esta ação não pode ser desfeita.
+        <i18n-t v-if="props.name" keypath="confirmDeleteDialog.confirmationMessage" tag="span">
+          <template #name>
+            <strong>{{ props.name }}</strong>
+          </template>
+        </i18n-t>
+        <span v-else>{{ t('confirmDeleteDialog.confirmationMessageGeneric') }}</span>
+        <br /><br />
+        {{ t('confirmDeleteDialog.irreversibleAction') }}
       </v-card-text>
 
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
-          text
+          :text="t('confirmDeleteDialog.cancelButton')"
           variant="plain"
           @click="$emit('update:modelValue', false)"
           :disabled="isLoading"
-        >
-          Cancelar
-        </v-btn>
+        ></v-btn>
 
         <v-btn
           color="error"
@@ -34,15 +37,18 @@
           @click="$emit('confirm')"
           :loading="isLoading"
           :disabled="isLoading"
-        >
-          Excluir
-        </v-btn>
+          :text="t('confirmDeleteDialog.deleteButton')"
+        ></v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
 const props = defineProps<{
   modelValue: boolean
   name?: string | null
