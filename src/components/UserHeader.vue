@@ -33,9 +33,9 @@
       @click="isDialogVisible = true"
     >
       <v-icon icon="mdi-plus"></v-icon>
-      <span class="ml-2 d-sm-none d-md-block d-lg-block d-xl-block">Cadastrar Aluno</span>
+      <span class="ml-2 d-sm-none d-md-block d-lg-block d-xl-block">Cadastrar Usuário</span>
     </v-btn>
-    <UserFormDialog v-model="isDialogVisible" :student="null" />
+    <UserFormDialog v-model="isDialogVisible" :user="null" />
   </v-card-title>
 </template>
 
