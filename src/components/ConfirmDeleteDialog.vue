@@ -13,7 +13,7 @@
 
       <v-card-text>
         Você tem certeza que deseja excluir
-        <strong v-if="props.student">"{{ props.student.name }}"</strong>? <br /><br />
+        <strong v-if="props.name">"{{ props.name }}"</strong>? <br /><br />
         Esta ação não pode ser desfeita.
       </v-card-text>
 
@@ -43,11 +43,9 @@
 </template>
 
 <script setup lang="ts">
-import type { Student } from '@/types/Student'
-
 const props = defineProps<{
   modelValue: boolean
-  student?: Student | null
+  name?: string | null
   isLoading?: boolean
 }>()
 
