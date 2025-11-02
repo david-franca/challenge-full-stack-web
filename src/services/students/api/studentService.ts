@@ -1,18 +1,10 @@
 import api from '@/services/api'
+import type { GetAllApiProps } from '@/types'
 import type { IPaginatedResponse } from '@/types/Paginate'
 import type { CreateStudent, Student, UpdateStudent } from '@/types/Student'
-import type { DataTableSortItem } from 'vuetify'
-
-interface GetAllStudentsProps {
-  search?: string
-  limit: number
-  page: number
-  field: string
-  order: DataTableSortItem['order']
-}
 
 export const getAllStudents = async (
-  params?: GetAllStudentsProps,
+  params?: GetAllApiProps,
 ): Promise<IPaginatedResponse<Student>> => {
   const response = await api.get<IPaginatedResponse<Student>>('/students', {
     params,

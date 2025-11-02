@@ -59,6 +59,12 @@ import StudentFormDialog from '@/components/StudentFormDialog.vue'
 import { useRemoveStudent } from '@/services/students/hooks/useRemoveStudent'
 import ConfirmDeleteDialog from '@/components/ConfirmDeleteDialog.vue'
 
+interface Options {
+  page: number
+  itemsPerPage: number
+  sortBy: { key: string; order: 'asc' | 'desc' }[] // Se precisar de ordenação no futuro
+}
+
 const route = useRoute()
 const router = useRouter()
 const search = computed(() => route.query.search?.toString() || '')
@@ -82,12 +88,6 @@ const headers = ref([
   { title: 'Ações', key: 'actions', sortable: false, align: 'center' as const },
 ])
 
-interface Options {
-  page: number
-  itemsPerPage: number
-  sortBy: { key: string; order: 'asc' | 'desc' }[] // Se precisar de ordenação no futuro
-}
-
 function updateOptions({ page: newPage, itemsPerPage: newItemsPerPage, sortBy }: Options) {
   router.push({
     query: {
@@ -100,9 +100,7 @@ function updateOptions({ page: newPage, itemsPerPage: newItemsPerPage, sortBy }:
   })
 }
 
-// --- Métodos dos Modais (Serão implementados) ---
 function openEditModal(student: Student) {
-  console.log('🚀 ~ openEditModal ~ student:', student)
   selectedStudent.value = student
   isDialogVisible.value = true
 }
@@ -119,7 +117,6 @@ async function handleDeleteConfirm() {
   }
 }
 
-// Observa a rota para atualizar as refs locais de paginação
 watch(
   () => route.query,
   (newQuery) => {
@@ -130,7 +127,3 @@ watch(
   },
 )
 </script>
-
-<style scoped>
-/* Você pode adicionar estilos específicos aqui, se necessário */
-</style>
