@@ -14,6 +14,12 @@ export const en = {
   layout: {
     students: 'Students',
     users: 'Users',
+    home: 'Home',
+  },
+  homeView: {
+    title: 'Student Management Module',
+    subtitle:
+      'Welcome to the student management platform. Here you can query, register, edit and remove students efficiently.',
   },
   studentList: {
     loading: 'Loading data... Please wait.',

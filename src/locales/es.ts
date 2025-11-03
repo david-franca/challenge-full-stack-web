@@ -14,6 +14,13 @@ export const es = {
   layout: {
     students: 'Alumnos',
     users: 'Usuarios',
+    home: 'Inicio',
+  },
+  homeView: {
+    title: 'Módulo de Gestión de Alumnos',
+    subtitle:
+      'Bienvenido a la plataforma de gestión académica. Aquí puedes consultar, registrar, editar y eliminar alumnos de forma eficiente.',
+    button: 'Acceder a la Gestión de Alumnos',
   },
   studentList: {
     loading: 'Cargando datos... Por favor, espere.',

@@ -32,11 +32,11 @@ router.beforeEach((to, from, next) => {
       text: 'Usuário não autorizado',
       color: 'error',
     })
-    return next('/students')
+    return next('/home')
   }
 
   if (!authRequired && isLoggedIn) {
-    return next('/students')
+    return next('/home')
   }
 
   next()

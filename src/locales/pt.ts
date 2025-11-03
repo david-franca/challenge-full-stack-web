@@ -14,6 +14,12 @@ export const pt = {
   layout: {
     students: 'Alunos',
     users: 'Usuários',
+    home: 'Início',
+  },
+  homeView: {
+    title: 'Módulo de Gestão de Alunos',
+    subtitle:
+      'Bem-vindo à plataforma de gerenciamento acadêmico. Aqui você pode consultar, cadastrar, editar e remover alunos de forma eficiente.',
   },
   studentList: {
     loading: 'Carregando dados... Por favor, aguarde.',

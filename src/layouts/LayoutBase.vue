@@ -58,6 +58,7 @@ const { t, locale } = useI18n()
 const drawer = ref(true)
 
 const allMenuItems = computed(() => [
+  { title: t('layout.home'), icon: 'mdi-home', to: '/home' },
   { title: t('layout.students'), icon: 'mdi-school', to: '/students' },
   { title: t('layout.users'), icon: 'mdi-account', to: '/users' },
 ])

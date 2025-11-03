@@ -15,7 +15,7 @@ export const useLogin = () => {
     onSuccess: ({ access_token }) => {
       setAuthHeader(access_token)
       setAuth(access_token)
-      router.push('/students')
+      router.push('/home')
     },
     onError: (err) => {
       const errors = handleErrors(err)
