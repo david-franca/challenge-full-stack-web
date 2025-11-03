@@ -99,6 +99,7 @@ export const en = {
     labels: {
       name: 'Full Name*',
       email: 'Email*',
+      role: 'Role*',
       password: 'Password*',
       newPassword: 'New Password',
     },

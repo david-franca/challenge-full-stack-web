@@ -100,6 +100,7 @@ export const pt = {
       name: 'Nome Completo*',
       email: 'Email*',
       password: 'Senha*',
+      role: 'Cargo*',
       newPassword: 'Nova Senha',
     },
     rules: {

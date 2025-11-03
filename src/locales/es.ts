@@ -101,6 +101,7 @@ export const es = {
       name: 'Nombre Completo*',
       email: 'Correo Electrónico*',
       password: 'Contraseña*',
+      role: 'Rol*',
       newPassword: 'Nueva Contraseña',
     },
     rules: {

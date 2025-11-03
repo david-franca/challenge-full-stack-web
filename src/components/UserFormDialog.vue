@@ -23,6 +23,16 @@
             </v-col>
 
             <v-col cols="12">
+              <v-select
+                v-model="role"
+                :label="t('userFormDialog.labels.role')"
+                :items="roleItems"
+                required
+                :rules="[rules.required]"
+              ></v-select>
+            </v-col>
+
+            <v-col cols="12">
               <v-text-field
                 v-model="password"
                 type="password"
@@ -108,6 +118,11 @@ const cardTitle = computed(() =>
 const saveButtonText = computed(() =>
   isEditing.value ? t('userFormDialog.updateButton') : t('userFormDialog.saveButton'),
 )
+
+const roleItems = computed(() => [
+  { title: t('userList.roles.user'), value: 'user' },
+  { title: t('userList.roles.admin'), value: 'admin' },
+])
 
 const rules = {
   required: (value: string) => !!value || t('userFormDialog.rules.required'),
