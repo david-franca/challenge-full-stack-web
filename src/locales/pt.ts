@@ -4,17 +4,30 @@ export const pt = {
   $vuetify: {
     ...ptLocale,
   },
+  common: {
+    alt: {
+      logo: 'Logo da MaisA',
+    },
+  },
   login: {
     title: 'Sistema de Gerenciamento',
     subtitle: 'Entre com sua conta para continuar',
     button: 'Entrar',
     email: 'E-mail',
     password: 'Senha',
+    rules: {
+      passwordMin: 'Senha deve ter pelo menos {min} caracteres',
+    },
   },
   layout: {
     students: 'Alunos',
     users: 'Usuários',
     home: 'Início',
+    languages: {
+      pt: 'Português',
+      en: 'Inglês',
+      es: 'Espanhol',
+    },
   },
   homeView: {
     title: 'Módulo de Gestão de Alunos',
@@ -61,7 +74,7 @@ export const pt = {
   },
   confirmDeleteDialog: {
     title: 'Confirmar Exclusão',
-    confirmationMessage: 'Você tem certeza que deseja excluir {name}"?',
+    confirmationMessage: 'Você tem certeza que deseja excluir "{name}"?',
     confirmationMessageGeneric: 'Você tem certeza que deseja excluir este item?',
     irreversibleAction: 'Esta ação não pode ser desfeita.',
     cancelButton: 'Cancelar',
@@ -109,18 +122,23 @@ export const pt = {
     },
   },
   notifications: {
-    student: {
-      created: 'Aluno adicionado com sucesso!',
-      updated: 'Aluno atualizado com sucesso!',
-      removed: 'Aluno removido com sucesso!',
+    resources: {
+      student: 'Aluno',
+      user: 'Usuário',
     },
-    session: {
-      expired: 'Sua sessão expirou. Por favor, faça login.',
+    success: {
+      created: '{resource} criado(a) com sucesso!',
+      updated: '{resource} atualizado(a) com sucesso!',
+      removed: '{resource} removido(a) com sucesso!',
     },
-    user: {
-      created: 'Usuário adicionado com sucesso!',
-      updated: 'Usuário atualizado com sucesso!',
-      removed: 'Usuário removido com sucesso!',
+    error: {
+      badRequest: 'Requisição inválida. Verifique os dados enviados.',
+      unauthorized: 'Não autorizado. Por favor, faça login novamente.',
+      forbidden: 'Você não tem permissão para executar esta ação.',
+      notFound: '{resource} não encontrado(a).',
+      conflict: 'Conflito: Os dados já existem ou estão duplicados.',
+      serverError: 'Erro interno do servidor. Tente novamente mais tarde.',
+      unknown: 'Ocorreu um erro desconhecido.',
     },
     auth: {
       sessionExpired: 'Sua sessão expirou. Por favor, faça login novamente.',

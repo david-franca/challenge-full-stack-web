@@ -71,11 +71,11 @@ const menuItems = computed(() => {
   return allMenuItems.value
 })
 
-const items = [
-  { title: 'Português', value: 'pt' },
-  { title: 'Inglês', value: 'en' },
-  { title: 'Espanhol', value: 'es' },
-]
+const items = computed(() => [
+  { title: t('layout.languages.pt'), value: 'pt' },
+  { title: t('layout.languages.en'), value: 'en' },
+  { title: t('layout.languages.es'), value: 'es' },
+])
 
 // --- Métodos (Methods) ---
 function changeLanguage(lang: string) {

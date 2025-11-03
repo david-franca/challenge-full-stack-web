@@ -4,7 +4,7 @@ import { login, setAuthHeader } from '../api/authService'
 import { useAuth } from '@/stores/auth.store'
 import { useRouter } from 'vue-router'
 import { useMessages } from '@/stores/messages.store'
-import { handleErrors } from '@/utils/handleErrors'
+import { handleApiResponse } from '@/utils/handleApiResponse'
 
 export const useLogin = () => {
   const { setAuth } = useAuth()
@@ -18,7 +18,7 @@ export const useLogin = () => {
       router.push('/home')
     },
     onError: (err) => {
-      const errors = handleErrors(err)
+      const errors = handleApiResponse(err, 'user')
       errors.forEach((error) => {
         addMessage({ text: error, color: 'error' })
       })

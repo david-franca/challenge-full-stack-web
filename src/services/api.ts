@@ -18,7 +18,7 @@ api.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       console.warn('Interceptor 401: Token expirado ou inválido.')
 
-      authStore.clearAuth(t('notifications.session.expired'))
+      authStore.clearAuth(t('notifications.auth.sessionExpired'))
     }
 
     return Promise.reject(error)

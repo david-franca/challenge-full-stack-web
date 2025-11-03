@@ -2,8 +2,8 @@ import { useMutation, useQueryClient } from '@tanstack/vue-query'
 import { createStudent } from '../api/studentService'
 import type { CreateStudent } from '@/types/Student'
 import { useMessages } from '@/stores/messages.store'
-import { handleErrors } from '@/utils/handleErrors'
 import { useI18n } from 'vue-i18n'
+import { handleApiResponse } from '@/utils/handleApiResponse'
 
 export const useCreateStudent = () => {
   const queryClient = useQueryClient()
@@ -13,11 +13,16 @@ export const useCreateStudent = () => {
   return useMutation({
     mutationFn: (payload: CreateStudent) => createStudent(payload),
     onSuccess: () => {
-      addMessage({ text: t('notifications.student.created'), color: 'success' })
+      const resourceName = t(`notifications.resources.student`)
+
+      addMessage({
+        text: t('notifications.success.created', { resource: resourceName }),
+        color: 'success',
+      })
       queryClient.invalidateQueries({ queryKey: ['students'] })
     },
     onError: (err) => {
-      const errors = handleErrors(err)
+      const errors = handleApiResponse(err, 'student')
       errors.forEach((error) => {
         addMessage({ text: error, color: 'error' })
       })

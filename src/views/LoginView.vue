@@ -1,11 +1,11 @@
 <template>
   <div class="login-container-base">
     <div class="image-logo-container">
-      <v-img src="./dark.png" alt="MaisA Logo" width="18rem" />
+      <v-img src="./dark.png" :alt="t('common.alt.logo')" width="18rem" />
     </div>
     <div class="card-container">
       <v-card variant="text">
-        <v-img src="./teacher.svg" alt="MaisA Logo" height="6rem" class="mb-4" />
+        <v-img src="./teacher.svg" :alt="t('common.alt.logo')" height="6rem" class="mb-4" />
         <v-card-title class="text-h5 text-center text-wrap"> {{ t('login.title') }} </v-card-title>
         <v-card-subtitle class="text-center pb-4 text-wrap">
           {{ t('login.subtitle') }}
@@ -59,12 +59,12 @@ const showPassword = ref(false)
 const form = ref<VForm | null>(null)
 
 const emailRules = [
-  (v: string) => !!v || 'Email é obrigatório',
-  (v: string) => /.+@.+\..+/.test(v) || 'Email deve ser válido',
+  (v: string) => !!v || t('userFormDialog.rules.required'),
+  (v: string) => /.+@.+\..+/.test(v) || t('userFormDialog.rules.email'),
 ]
 const passwordRules = [
-  (v: string) => !!v || 'Senha é obrigatória',
-  (v: string) => v.length >= 3 || 'Senha deve ter pelo menos 3 caracteres',
+  (v: string) => !!v || t('userFormDialog.rules.required'),
+  (v: string) => v.length >= 3 || t('login.rules.passwordMin', { min: 3 }),
 ]
 
 // --- Métodos (Methods) ---
