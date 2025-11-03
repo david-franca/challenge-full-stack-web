@@ -88,7 +88,7 @@ function handleLogout() {
 </script>
 
 <style scoped lang="css">
-.app-bar-container {
+.v-toolbar.app-bar-container {
   background: #020024;
   background: linear-gradient(
     90deg,
