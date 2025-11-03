@@ -7,7 +7,7 @@ export const es = {
   login: {
     title: 'Sistema de Gestión',
     subtitle: 'Inicia sesión con tu cuenta para continuar',
-    button: 'Iniciar Sesión',
+    button: 'Entrar',
     email: 'Correo Electrónico',
     password: 'Contraseña',
   },
@@ -19,8 +19,7 @@ export const es = {
   homeView: {
     title: 'Módulo de Gestión de Alumnos',
     subtitle:
-      'Bienvenido a la plataforma de gestión académica. Aquí puedes consultar, registrar, editar y eliminar alumnos de forma eficiente.',
-    button: 'Acceder a la Gestión de Alumnos',
+      'Bienvenido a la plataforma de gestión académica. Aquí puede consultar, registrar, editar y eliminar alumnos de forma eficiente.',
   },
   studentList: {
     loading: 'Cargando datos... Por favor, espere.',
@@ -37,7 +36,7 @@ export const es = {
   },
   studentHeader: {
     title: 'Consulta de Alumnos',
-    searchPlaceholder: 'Escribe tu búsqueda...',
+    searchPlaceholder: 'Escriba su búsqueda...',
     registerStudent: 'Registrar Alumno',
   },
   studentFormDialog: {
@@ -49,21 +48,21 @@ export const es = {
     requiredFields: '*indica campos obligatorios',
     labels: {
       name: 'Nombre Completo*',
-      email: 'Correo Electrónico*',
+      email: 'Email*',
       ra: 'RA (Registro Académico)*',
-      cpf: 'CPF (Registro de Personas Físicas)*',
+      cpf: 'CPF (Documento de Identidad)*',
     },
     rules: {
       required: 'Este campo es obligatorio.',
-      email: 'El correo electrónico debe ser válido.',
+      email: 'El email debe ser válido.',
       cpfLength: 'El CPF debe contener 11 dígitos.',
       cpfValid: 'CPF inválido.',
     },
   },
   confirmDeleteDialog: {
     title: 'Confirmar Eliminación',
-    confirmationMessage: '¿Estás seguro de que deseas eliminar a "{name}"?',
-    confirmationMessageGeneric: '¿Estás seguro de que deseas eliminar este elemento?',
+    confirmationMessage: '¿Está seguro de que desea eliminar a "{name}"?',
+    confirmationMessageGeneric: '¿Está seguro de que desea eliminar este ítem?',
     irreversibleAction: 'Esta acción no se puede deshacer.',
     cancelButton: 'Cancelar',
     deleteButton: 'Eliminar',
@@ -87,7 +86,7 @@ export const es = {
   },
   userHeader: {
     title: 'Consulta de Usuarios',
-    searchPlaceholder: 'Escribe tu búsqueda...',
+    searchPlaceholder: 'Escriba su búsqueda...',
     registerUser: 'Registrar Usuario',
   },
   userFormDialog: {
@@ -99,32 +98,37 @@ export const es = {
     requiredFields: '*indica campos obligatorios',
     labels: {
       name: 'Nombre Completo*',
-      email: 'Correo Electrónico*',
+      email: 'Email*',
       password: 'Contraseña*',
       role: 'Rol*',
       newPassword: 'Nueva Contraseña',
     },
     rules: {
       required: 'Este campo es obligatorio.',
-      email: 'El correo electrónico debe ser válido.',
+      email: 'El email debe ser válido.',
     },
   },
   notifications: {
-    student: {
-      created: '¡Alumno añadido con éxito!',
-      updated: '¡Alumno actualizado con éxito!',
-      removed: '¡Alumno eliminado con éxito!',
+    resources: {
+      student: 'Alumno',
+      user: 'Usuario',
     },
-    session: {
-      expired: 'Tu sesión ha expirado. Por favor, inicia sesión.',
+    success: {
+      created: '¡{resource} creado(a) con éxito!',
+      updated: '¡{resource} actualizado(a) con éxito!',
+      removed: '¡{resource} eliminado(a) con éxito!',
     },
-    user: {
-      created: '¡Usuario añadido con éxito!',
-      updated: '¡Usuario actualizado con éxito!',
-      removed: '¡Usuario eliminado con éxito!',
+    error: {
+      badRequest: 'Solicitud inválida. Verifique los datos enviados.',
+      unauthorized: 'No autorizado. Por favor, inicie sesión de nuevo.',
+      forbidden: 'No tiene permiso para realizar esta acción.',
+      notFound: '{resource} no encontrado(a).',
+      conflict: 'Conflicto: Los datos ya existen o están duplicados.',
+      serverError: 'Error interno del servidor. Intente nuevamente más tarde.',
+      unknown: 'Ocurrió un error desconocido.',
     },
     auth: {
-      sessionExpired: 'Tu sesión ha expirado. Por favor, inicia sesión de nuevo.',
+      sessionExpired: 'Su sesión ha expirado. Por favor, inicie sesión de nuevo.',
       invalidToken: 'Token JWT inválido:',
       logout: 'Cerrando sesión...',
       error: 'Error desconocido.',

@@ -2,8 +2,8 @@ import { useMessages } from '@/stores/messages.store'
 import type { UpdateUserProps } from '@/types'
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
 import { updateUser } from '../api/userService'
-import { handleErrors } from '@/utils/handleErrors'
 import { useI18n } from 'vue-i18n'
+import { handleApiResponse } from '@/utils/handleApiResponse'
 
 export const useUpdateUser = () => {
   const { addMessage } = useMessages()
@@ -13,11 +13,16 @@ export const useUpdateUser = () => {
   return useMutation({
     mutationFn: ({ payload, id }: UpdateUserProps) => updateUser(id, payload),
     onSuccess: () => {
-      addMessage({ text: t('notifications.user.updated'), color: 'success' })
+      const resourceName = t(`notifications.resources.user`)
+
+      addMessage({
+        text: t('notifications.success.updated', { resource: resourceName }),
+        color: 'success',
+      })
       queryClient.invalidateQueries({ queryKey: ['users'] })
     },
     onError: (err) => {
-      const errors = handleErrors(err)
+      const errors = handleApiResponse(err, 'user')
       errors.forEach((error) => {
         addMessage({ text: error, color: 'error' })
       })

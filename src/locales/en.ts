@@ -6,9 +6,9 @@ export const en = {
   },
   login: {
     title: 'Management System',
-    subtitle: 'Log in with your account to continue',
-    button: 'Login',
-    email: 'E-mail',
+    subtitle: 'Sign in with your account to continue',
+    button: 'Sign In',
+    email: 'Email',
     password: 'Password',
   },
   layout: {
@@ -19,7 +19,7 @@ export const en = {
   homeView: {
     title: 'Student Management Module',
     subtitle:
-      'Welcome to the student management platform. Here you can query, register, edit and remove students efficiently.',
+      'Welcome to the academic management platform. Here you can query, register, edit, and remove students efficiently.',
   },
   studentList: {
     loading: 'Loading data... Please wait.',
@@ -35,12 +35,12 @@ export const en = {
     },
   },
   studentHeader: {
-    title: 'Student Query',
-    searchPlaceholder: 'Enter your search...',
-    registerStudent: 'Register Student',
+    title: 'Manage Students',
+    searchPlaceholder: 'Type your search...',
+    registerStudent: 'Add Student',
   },
   studentFormDialog: {
-    createTitle: 'Register Student',
+    createTitle: 'Add Student',
     editTitle: 'Edit Student',
     saveButton: 'Save',
     updateButton: 'Update',
@@ -49,12 +49,12 @@ export const en = {
     labels: {
       name: 'Full Name*',
       email: 'Email*',
-      ra: 'RA (Academic Registry)*',
-      cpf: 'CPF (Individual Taxpayer Registry)*',
+      ra: 'Student ID (RA)*',
+      cpf: 'CPF (Individual Tax ID)*',
     },
     rules: {
       required: 'This field is required.',
-      email: 'The e-mail must be valid.',
+      email: 'The email must be valid.',
       cpfLength: 'The CPF must contain 11 digits.',
       cpfValid: 'Invalid CPF.',
     },
@@ -85,12 +85,12 @@ export const en = {
     },
   },
   userHeader: {
-    title: 'User Query',
-    searchPlaceholder: 'Enter your search...',
-    registerUser: 'Register User',
+    title: 'Manage Users',
+    searchPlaceholder: 'Type your search...',
+    registerUser: 'Add User',
   },
   userFormDialog: {
-    createTitle: 'Register User',
+    createTitle: 'Add User',
     editTitle: 'Edit User',
     saveButton: 'Save',
     updateButton: 'Update',
@@ -99,28 +99,33 @@ export const en = {
     labels: {
       name: 'Full Name*',
       email: 'Email*',
-      role: 'Role*',
       password: 'Password*',
+      role: 'Role*',
       newPassword: 'New Password',
     },
     rules: {
       required: 'This field is required.',
-      email: 'The e-mail must be valid.',
+      email: 'The email must be valid.',
     },
   },
   notifications: {
-    student: {
-      created: 'Student added successfully!',
-      updated: 'Student updated successfully!',
-      removed: 'Student removed successfully!',
+    resources: {
+      student: 'Student',
+      user: 'User',
     },
-    session: {
-      expired: 'Your session has expired. Please log in.',
+    success: {
+      created: '{resource} created successfully!',
+      updated: '{resource} updated successfully!',
+      removed: '{resource} removed successfully!',
     },
-    user: {
-      created: 'User added successfully!',
-      updated: 'User updated successfully!',
-      removed: 'User removed successfully!',
+    error: {
+      badRequest: 'Invalid request. Please check the data sent.',
+      unauthorized: 'Unauthorized. Please log in again.',
+      forbidden: 'You do not have permission to perform this action.',
+      notFound: '{resource} not found.',
+      conflict: 'Conflict: The data already exists or is duplicated.',
+      serverError: 'Internal server error. Please try again later.',
+      unknown: 'An unknown error occurred.',
     },
     auth: {
       sessionExpired: 'Your session has expired. Please log in again.',

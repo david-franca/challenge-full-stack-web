@@ -1,8 +1,8 @@
 import { useMessages } from '@/stores/messages.store'
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
 import { removeUser } from '../api/userService'
-import { handleErrors } from '@/utils/handleErrors'
 import { useI18n } from 'vue-i18n'
+import { handleApiResponse } from '@/utils/handleApiResponse'
 
 export const useRemoveUser = () => {
   const queryClient = useQueryClient()
@@ -12,11 +12,16 @@ export const useRemoveUser = () => {
   return useMutation({
     mutationFn: (id: number) => removeUser(id),
     onSuccess: () => {
+      const resourceName = t(`notifications.resources.user`)
+
+      addMessage({
+        text: t('notifications.success.removed', { resource: resourceName }),
+        color: 'success',
+      })
       queryClient.invalidateQueries({ queryKey: ['users'] })
-      addMessage({ text: t('notifications.user.removed'), color: 'success' })
     },
     onError: (err) => {
-      const messages = handleErrors(err)
+      const messages = handleApiResponse(err, 'user')
       messages.forEach((message) => {
         addMessage({ text: message, color: 'error' })
       })

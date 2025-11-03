@@ -109,18 +109,23 @@ export const pt = {
     },
   },
   notifications: {
-    student: {
-      created: 'Aluno adicionado com sucesso!',
-      updated: 'Aluno atualizado com sucesso!',
-      removed: 'Aluno removido com sucesso!',
+    resources: {
+      student: 'Aluno',
+      user: 'Usuário',
     },
-    session: {
-      expired: 'Sua sessão expirou. Por favor, faça login.',
+    success: {
+      created: '{resource} criado(a) com sucesso!',
+      updated: '{resource} atualizado(a) com sucesso!',
+      removed: '{resource} removido(a) com sucesso!',
     },
-    user: {
-      created: 'Usuário adicionado com sucesso!',
-      updated: 'Usuário atualizado com sucesso!',
-      removed: 'Usuário removido com sucesso!',
+    error: {
+      badRequest: 'Requisição inválida. Verifique os dados enviados.',
+      unauthorized: 'Não autorizado. Por favor, faça login novamente.',
+      forbidden: 'Você não tem permissão para executar esta ação.',
+      notFound: '{resource} não encontrado(a).',
+      conflict: 'Conflito: Os dados já existem ou estão duplicados.',
+      serverError: 'Erro interno do servidor. Tente novamente mais tarde.',
+      unknown: 'Ocorreu um erro desconhecido.',
     },
     auth: {
       sessionExpired: 'Sua sessão expirou. Por favor, faça login novamente.',
