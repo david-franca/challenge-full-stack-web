@@ -1,0 +1,27 @@
+import type { Login } from '@/types/Auth'
+import { useMutation } from '@tanstack/vue-query'
+import { login, setAuthHeader } from '../api/authService'
+import { useAuth } from '@/stores/auth.store'
+import { useRouter } from 'vue-router'
+import { useMessages } from '@/stores/messages.store'
+import { handleApiResponse } from '@/utils/handleApiResponse'
+
+export const useLogin = () => {
+  const { setAuth } = useAuth()
+  const router = useRouter()
+  const { addMessage } = useMessages()
+  return useMutation({
+    mutationFn: (payload: Login) => login(payload),
+    onSuccess: ({ access_token }) => {
+      setAuthHeader(access_token)
+      setAuth(access_token)
+      router.push('/home')
+    },
+    onError: (err) => {
+      const errors = handleApiResponse(err, 'user')
+      errors.forEach((error) => {
+        addMessage({ text: error, color: 'error' })
+      })
+    },
+  })
+}
